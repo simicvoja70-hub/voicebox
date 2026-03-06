@@ -1,7 +1,6 @@
 """
 PyInstaller build script for creating standalone Python server binary.
 """
-
 import PyInstaller.__main__
 import os
 import platform
@@ -20,7 +19,7 @@ def build_server():
     # PyInstaller arguments
     args = [
         'server.py',  # Use server.py as entry point instead of main.py
-        '--onefile',
+        '--onedir',   # --onefile exceeds 4GB CArchive limit with PyTorch+CUDA
         '--name', 'voicebox-server',
     ]
 
@@ -101,10 +100,10 @@ def build_server():
 
     # Change to backend directory
     os.chdir(backend_dir)
-    
+
     # Run PyInstaller
     PyInstaller.__main__.run(args)
-    
+
     print(f"Binary built in {backend_dir / 'dist' / 'voicebox-server'}")
 
 
