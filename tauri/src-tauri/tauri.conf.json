@@ -28,6 +28,7 @@
       "entitlements": "Entitlements.plist"
     },
     "resources": {
+      "binaries/_internal": "./_internal",
       "gen/Assets.car": "./",
       "gen/voicebox.icns": "./",
       "gen/partial.plist": "./"
