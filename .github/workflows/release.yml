@@ -46,16 +46,10 @@ jobs:
           cd backend
           python build_binary.py
 
-          # Get platform tuple for Tauri sidecar naming
           PLATFORM=$(rustc --print host-tuple)
-
-          # Create binaries directory
           mkdir -p ../tauri/src-tauri/binaries
 
-          # Copy executable with platform suffix (what externalBin expects)
           cp dist/voicebox-server/voicebox-server ../tauri/src-tauri/binaries/voicebox-server-${PLATFORM}
-
-          # Copy _internal libs folder alongside it (PyInstaller onedir requires this)
           cp -r dist/voicebox-server/_internal ../tauri/src-tauri/binaries/_internal
 
           echo "Built voicebox-server-${PLATFORM}"
@@ -71,7 +65,7 @@ jobs:
         with:
           workspaces: "./tauri/src-tauri -> target"
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: bun install
 
       - uses: tauri-apps/tauri-action@v0
